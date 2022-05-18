@@ -40,4 +40,4 @@ Passwords will be secured via Bcrypt and username along with associated user inf
 ## Stretch Goals (Beyond CRUD)
 1. User can see graphs visually displaying their anime lists separated by scores, genres, etc.
 2. Users can leave comments on another users profile (social aspect)
-# Capstone1
+
