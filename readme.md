@@ -19,7 +19,7 @@ I will be using JSON data providing information about each anime using Kitsu API
 - **Favorites** -- consists of custom lists of anime that the user has favorited. User can create no more than 10 of these customized lists
 
 ## Potential issues
-1. All MyAnimeList data provided on the Jikan API is cached on servers for 24 hours so it is possible for the information to not be most up to date when the user makes the request
+1. Some anime searches that users may do may not give the best recommendation results for what they could watch
 2. Difficulty of implementing an accurate recommendation system given the data I have to work with
 
 ## Sensitive Information to Secure
