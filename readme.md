@@ -9,7 +9,7 @@ It will allow for users to make lists of anime that they have watched or plan on
 People who enjoy watching anime and want to track their viewing online as well as wanting to search for new anime to watch.
 
 ## Data being used
-I will be using JSON data providing information about each anime using Jikan API which scrapes data from MyAnimeList (MAL). Additionally, I would like the data retrieved to contain information on a per anime basis based on what the user can search for such as year released, genre, score received on MAL and so forth.
+I will be using JSON data providing information about each anime using Kitsu API (https://kitsu.docs.apiary.io/#). Additionally, I would like the data retrieved to contain information on a per anime basis based on what the user can search for such as year released, genre, score received on MAL and so forth.
 
 ## Database Schema
 [Schema Draft](https://app.quickdatabasediagrams.com/#/d/TO3e7P)
