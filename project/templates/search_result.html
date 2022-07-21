@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   Search Results
+{% endblock %}
+
+{% block jquery_script %}
+ {{ super() }}
+{% endblock %}
+
+
+{% block navbars %}
+    {% if userOn %}
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Welcome to IADB!</a>
+            </div>
+
+            <ul class="navbar-nav navbar-right">
+                <button class="btn btn-dark">
+                    <a class = "navbar-brand" href="/"> Home </a>
+                </button>
+                <button class="btn btn-dark">
+                    <a class = "navbar-brand" href="/search"> Search </a>
+                </button>
+                <button class="btn btn-dark">
+                    <a class = "navbar-brand" href="/users/{{user.username}}"> Profile </a>
+                </button>
+                <button class="btn btn-dark">
+                    <a class = "navbar-brand" href="/logout"> Logout</a>
+                </button>
+            </ul>
+
+        </div>
+    </nav>
+    {% else %}
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Welcome to IADB!</a>
+            </div>
+            
+            <ul class="navbar-nav navbar-right">
+                <button class="btn btn-dark">
+                    <a class = "navbar-brand" href="/search"> Search </a>
+                </button>
+                <button class="btn btn-dark">
+                    <a class="navbar-brand" href="/register"> Register </a>
+                </button>
+                <button class="btn btn-dark">
+                    <a class="navbar-brand" href="/login"> Login</a>
+                </button>
+            </ul>
+
+        </div>
+    </nav>
+    {% endif %}
+{% endblock %}
+
+
+{% block content %}
+
+<h1> Search Results: </h1>
+
+{% for dict in response %}
+
+<div class="anime_container jumbotron">
+
+    <div id="fav-success">
+
+    </div>
+
+    <div id="towatch-success">
+
+    </div>
+
+    <div id="watched-success">
+
+    </div>
+
+    <h2 class="anime_title display-4" id="{{dict['id']}}"> {{dict["title"]}} </h2>
+    <h4>Synopsis: 
+        <p class="lead"> {{dict["synopsis"]}}</p>
+    </h4>
+   
+    <div class = "col-md-4 mb-3">
+        <img src="{{dict['img_url']}}">
+    </div>
+    
+    {% if userOn %}
+
+    <div class="categories-buttons">
+        
+        {% set key_fav = "Favorites" ~ "-" ~ dict['num'] %}
+        <button class = "add_to_favorites btn btn-primary" id ="add_to_favorites-{{dict['num']}}" value="favorites" data-selected="false" data-disable = "{{dict[key_fav]}}" >
+            Add to Favorites
+        </button>
+        {% set key_to_watch = "ToWatch" ~ "-" ~ dict['num'] %}
+        <button class = "add_to_watch btn btn-secondary" id="add_to_watch-{{dict['num']}}" value="to_watch" data-selected="false" data-disable = "{{dict[key_to_watch]}}" >
+            Add to To-Watch
+        </button>
+        {% set key_watched = "Watched" ~ "-" ~ dict['num'] %}
+        <button class = "add_to_watched btn btn-success" id="add_to_watched-{{dict['num']}}" value="to_watched" data-selected="false" data-disable = "{{dict[key_watched]}}" >
+            Add to Watched
+        </button>
+    </div>
+    {% endif %}
+
+    <hr>
+</div>
+
+{% endfor %}
+
+{% endblock %}
+
+
+
+{% block scripts %}
+    {{ super() }}
+{% endblock %}

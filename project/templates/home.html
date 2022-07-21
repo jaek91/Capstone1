@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   Welcome to the Home Page of IADB!
+{% endblock %}
+
+{% block navbars %}
+    {% if userOn %}
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Welcome to IADB!</a>
+            </div>
+
+            <ul class="navbar-nav navbar-right">
+                <button class="btn btn-dark">
+                    <a class = "navbar-brand" href="/"> Home </a>
+                </button>
+                <button class="btn btn-dark">
+                    <a class = "navbar-brand" href="/search"> Search </a>
+                </button>
+                <button class="btn btn-dark">
+                    <a class = "navbar-brand" href="/users/{{user.username}}"> Profile </a>
+                </button>
+                <button class="btn btn-dark">
+                    <a class = "navbar-brand" href="/logout"> Logout</a>
+                </button>
+            </ul>
+
+        </div>
+    </nav>
+    {% else %}
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Welcome to IADB!</a>
+            </div>
+  
+            <ul class="navbar-nav navbar-right">
+                <button class="btn btn-dark">
+                    <a class = "navbar-brand" href="/search"> Search </a>
+                </button>
+                <button class="btn btn-dark">
+                    <a class="navbar-brand" href="/register"> Register </a>
+                </button>
+                <button class="btn btn-dark">
+                    <a class="navbar-brand" href="/login"> Login</a>
+                </button>
+            </ul>
+
+        </div>
+    </nav>
+    {% endif %}
+{% endblock %}
+
+
+
+
+{% block content %} 
+
+<div class="main_page jumbotron">
+    <h1 class="display-2">IADB</h1>
+    <h2 class="lead display-6">About Us:</h2>
+    <p class="about_us_description display-7">
+        IADB (Internet Anime Database) serves as an minimalist website allowing users to search for anime and store them into lists for their viewing pleasure
+    </p>
+</div>
+
+<div class="main_page_img">
+    <img src="https://64.media.tumblr.com/881d776707297d0cdb358bdfea6de62e/tumblr_n11udpHvuU1tsanvjo1_500.gifv" alt="">
+</div>
+
+
+
+{% endblock %}

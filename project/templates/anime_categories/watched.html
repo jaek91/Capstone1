@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    List of Animes Watched!
+{% endblock %} 
+
+{% block jquery_script %}
+ {{ super() }}
+{% endblock %}
+
+{% block navbars %}
+    {% if userOn %}
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Welcome to IADB!</a>
+            </div>
+
+            <ul class="navbar-nav navbar-right">
+                <button class="btn btn-dark">
+                    <a class = "navbar-brand" href="/"> Home </a>
+                </button>
+                <button class="btn btn-dark">
+                    <a class = "navbar-brand" href="/search"> Search </a>
+                </button>
+                <button class="btn btn-dark">
+                    <a class = "navbar-brand" href="/users/{{username}}"> Profile </a>
+                </button>
+                <button class="btn btn-dark">
+                    <a class = "navbar-brand" href="/logout"> Logout</a>
+                </button>
+            </ul>
+
+        </div>
+    </nav>
+    {% else %}
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Welcome to IADB!</a>
+            </div>
+  
+            <ul class="navbar-nav navbar-right">
+                <button class="btn btn-dark">
+                    <a class = "navbar-brand" href="/search"> Search </a>
+                </button>
+                <button class="btn btn-dark">
+                    <a class="navbar-brand" href="/register"> Register </a>
+                </button>
+                <button class="btn btn-dark">
+                    <a class="navbar-brand" href="/login"> Login</a>
+                </button>
+            </ul>
+
+        </div>
+    </nav>
+    {% endif %}
+{% endblock %}
+
+
+{% block content %} 
+
+<h2 class="anime_title display-4"> {{user.username}}'s watched animes!</h2>
+
+{% for watched in user.watched %}
+<div class="anime_container jumbotron" data-username="{{username}}">
+    <h2 class="anime_title display-4"> {{watched.name}} </h2>
+    <h4>Synopsis: 
+        <p class="lead"> {{watched.description}}</p>
+    </h4>
+    
+    <div class = "col-md-4 mb-3">
+        <img src="">
+    </div>
+
+    <button id = delete_watched-{{watched.id}} class="delete_anime btn btn-danger" data-selected="false">
+        Delete From List
+    </button>
+
+    <hr>
+</div>
+{% endfor %}
+
+{% endblock %}
+
+
+
+
+
+
+
+{% block scripts %}
+    {{ super() }}
+{% endblock %}

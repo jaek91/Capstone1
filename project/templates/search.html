@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Welcome to the IADB home page!
+{% endblock %}
+
+{% block jquery_script %}
+ {{ super() }}
+{% endblock %}
+
+{% block navbars %}
+    {% if userOn %}
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark mb-4">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Welcome to IADB!</a>
+            </div>
+
+        <ul class="navbar-nav navbar-right">
+            <button class="btn btn-dark">
+                <a class = "navbar-brand" href="/"> Home </a>
+            </button>
+            <button class="btn btn-dark">
+                <a class = "navbar-brand" href="/search"> Search </a>
+            </button>
+            <button class="btn btn-dark">
+                <a class = "navbar-brand" href="/users/{{user.username}}"> Profile </a>
+            </button>
+            <button class="btn btn-dark">
+                <a class = "navbar-brand" href="/logout"> Logout</a>
+            </button>
+        </ul>
+
+        </div>
+    </nav>
+    {% else %}
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Welcome to IADB!</a>
+            </div>
+  
+            <ul class="navbar-nav navbar-right">
+                <button class="btn btn-dark">
+                    <a class = "navbar-brand" href="/search"> Search </a>
+                </button>
+                <button class="btn btn-dark">
+                    <a class="navbar-brand" href="/register"> Register </a>
+                </button>
+                <button class="btn btn-dark">
+                    <a class="navbar-brand" href="/login"> Login</a>
+                </button>
+            </ul>
+
+        </div>
+    </nav>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<div class="search_bar_container">
+    
+    <div class="search_bar col-md-6">
+        <h1 class="mb-4">Search for an anime!</h1>
+        <form method="POST">
+
+        {{ form.hidden_tag() }}
+        
+        {% for field in form
+            if field.widget.input_type != 'hidden' %}
+            <p>
+            {{ field.label }}
+            {{ field(class_="form-control") }}
+        
+            {% for error in field.errors %}
+                <span class="form-text text-danger">{{ error }}</span>
+            {% endfor %}
+            </p>
+        {% endfor %}
+        
+            <button class="btn btn-success" type="submit"> Search </button>
+        
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+{% endblock %}

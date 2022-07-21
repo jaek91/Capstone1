@@ -1,0 +1,38 @@
+
+.main_page {
+  justify-content: center;
+  margin-bottom: 100px;
+}
+
+.main_page h1 {
+  width: 500px;
+  margin: 0 auto;
+}
+.main_page p {
+  margin: 0 auto;
+}
+
+
+.h2, h2 {
+    font-size: 2rem;
+}
+
+hr {
+  border: 2px solid gray
+}
+
+.about_us_description {
+  font-size: 1.5rem;
+}
+
+.main_page_img {
+  margin: 0 auto;
+}
+
+.search_bar {
+  margin: 0 auto;
+}
+
+.login_container {
+  margin: 0 auto;
+}
