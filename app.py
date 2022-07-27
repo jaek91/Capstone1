@@ -1,8 +1,7 @@
 
 import json
-import requests
 import os
-from flask import Flask, render_template, redirect, session, flash, request, jsonify
+from flask import Flask, render_template, redirect, session, flash, request
 from models import connect_db, db, User, Favorites, Watched, ToWatch
 from request_info import *
 from recommendations import *

@@ -1,7 +1,6 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
-import numpy as np
 
 ## my collaborative filtering recommendation algorithm implementation is based off of what's mentioned on  
 ## https://www.kaggle.com/indralin/try-content-based-and-collaborative-filtering
