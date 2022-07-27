@@ -3,7 +3,6 @@ import json
 import requests
 import os
 from flask import Flask, render_template, redirect, session, flash, request, jsonify
-from flask_debugtoolbar import DebugToolbarExtension
 from models import connect_db, db, User, Favorites, Watched, ToWatch
 from request_info import *
 from recommendations import *
@@ -12,11 +11,10 @@ from werkzeug.exceptions import Unauthorized
 import random
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql:///anime_db"
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL", "postgresql:///anime_db")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ECHO"] = True
 app.config["SECRET_KEY"] = os.urandom(12).hex()
-app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 connect_db(app)
 db.create_all()
