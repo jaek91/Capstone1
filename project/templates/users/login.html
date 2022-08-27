@@ -29,15 +29,17 @@
 
 
 {% block content %}
+<h1>Login to IADB!</h1>
+<div>
+
 
 </div class="login_container col-md-6">
-<h1 style="margin: 0 auto;">Login to IADB!</h1>
 <form method="POST">
     {{ form.hidden_tag() }}
     
     {% for field in form
         if field.widget.input_type != 'hidden' %}
-        <p style="width:511px;">
+        <p>
           {{ field.label }}
           {{ field(class_="form-control") }}
       
@@ -47,7 +49,7 @@
         </p>
     {% endfor %}
       
-        <button class="btn btn-success" style="width:200px; margin: 0 auto;" type="submit">Login</button>
+        <button class="btn btn-success" type="submit">Login</button>
     
     </form>
 </div>

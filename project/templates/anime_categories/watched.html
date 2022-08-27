@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 
+
 {% block title %}
-   Welcome to the Home Page of IADB!
+    List of Animes Watched!
+{% endblock %} 
+
+{% block jquery_script %}
+ {{ super() }}
 {% endblock %}
 
 {% block navbars %}
@@ -20,7 +25,7 @@
                     <a class = "navbar-brand" href="/search"> Search </a>
                 </button>
                 <button class="btn btn-dark">
-                    <a class = "navbar-brand" href="/users/{{user.username}}"> Profile </a>
+                    <a class = "navbar-brand" href="/users/{{username}}"> Profile </a>
                 </button>
                 <button class="btn btn-dark">
                     <a class = "navbar-brand" href="/logout"> Logout</a>
@@ -54,25 +59,37 @@
 {% endblock %}
 
 
-
-
 {% block content %} 
 
-<div class="main_page jumbotron">
-    <div style="width: 600px; margin: 0 auto;">
-        <h2 class="lead display-6">About Us:</h2>
-        <p class="about_us_description display-7">
-        IADB (Internet Anime Database) serves as an minimalist website allowing users to search for anime and store them into lists for their viewing pleasure
-        </p>
+<h2 class="anime_title display-4"> {{user.username}}'s watched animes!</h2>
+
+{% for watched in user.watched %}
+<div class="anime_container jumbotron" data-username="{{username}}">
+    <h2 class="anime_title display-4"> {{watched.name}} </h2>
+    <h4>Synopsis: 
+        <p class="lead"> {{watched.description}}</p>
+    </h4>
+    
+    <div class = "col-md-4 mb-3">
+        <img src="">
     </div>
+
+    <button id = delete_watched-{{watched.id}} class="delete_anime btn btn-danger" data-selected="false">
+        Delete From List
+    </button>
+
+    <hr>
 </div>
+{% endfor %}
 
-<div class="main_page_img">
-    <div style="width: 500px; margin: 0 auto;">
-        <img src="https://64.media.tumblr.com/881d776707297d0cdb358bdfea6de62e/tumblr_n11udpHvuU1tsanvjo1_500.gifv" alt="">
-    </div>
-</div>
+{% endblock %}
 
 
 
+
+
+
+
+{% block scripts %}
+    {{ super() }}
 {% endblock %}

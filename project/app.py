@@ -1,7 +1,9 @@
 
 import json
+import requests
 import os
-from flask import Flask, render_template, redirect, session, flash, request
+from flask import Flask, render_template, redirect, session, flash, request, jsonify
+from flask_debugtoolbar import DebugToolbarExtension
 from models import connect_db, db, User, Favorites, Watched, ToWatch
 from request_info import *
 from recommendations import *
@@ -10,17 +12,15 @@ from werkzeug.exceptions import Unauthorized
 import random
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL", "postgresql:///anime_db")
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql:///anime_db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ECHO"] = True
 app.config["SECRET_KEY"] = os.urandom(12).hex()
+app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 connect_db(app)
 db.create_all()
 
-@app.errorhandler(404)
-def not_found(e):
-  return render_template("404.html")
 
 @app.route('/')
 def home_page():
@@ -84,18 +84,13 @@ def logout():
     session.pop("username")
     return redirect("/")
 
-@app.route('/recommendations', methods=["GET"])
-def display_recommendations(title):
-    """this will be in the recommendations service app.py """
-    return give_recommendations(title)
-
 @app.route('/users/<username>', methods=["GET"])
 def display_user_info(username):
     if "username" not in session or username != session['username']:
         raise Unauthorized
     else:
         user = User.query.get(username)
-        
+       
         fav_titles = Favorites.query.with_entities(Favorites.name).filter_by(username = username).all()
         curr_db_fav_titles = [name[0] for name in fav_titles]
         processed_fav_titles = []
@@ -104,14 +99,15 @@ def display_user_info(username):
             for title in curr_db_fav_titles: 
                 jp_title = convert_title_to_jp(title)
                 results = give_recommendations(jp_title)
-                if len(results) > 0:                
-                    ## if we have some recommendations, then append it to show in recommendations
+                if results is not False:
+                ## we do this preprocessing because not every title in the static database for our recommendation system 
+                ## that we're comparing to the user's favorites list will have a corresponding match 
                     processed_fav_titles.append(title) 
             
             ## we randomly choose a title from user's favorite's list ##
             random_title = random.choice(processed_fav_titles)
             jp_title = convert_title_to_jp(random_title)
-            results = give_recommendations(jp_title)
+            results = json.loads(give_recommendations(jp_title))
             suggested_titles = get_unique_titles(results, jp_title)
            
             rec_titles_info = get_info_recommended_titles(suggested_titles)

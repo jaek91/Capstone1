@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
 
 {% block title %}
-   Welcome to the Home Page of IADB!
+    List of Favorites!
+{% endblock %} 
+
+{% block jquery_script %}
+ {{ super() }}
+<script src="/static/app.js"></script>
+ 
 {% endblock %}
 
 {% block navbars %}
@@ -20,7 +26,7 @@
                     <a class = "navbar-brand" href="/search"> Search </a>
                 </button>
                 <button class="btn btn-dark">
-                    <a class = "navbar-brand" href="/users/{{user.username}}"> Profile </a>
+                    <a class = "navbar-brand" href="/users/{{username}}"> Profile </a>
                 </button>
                 <button class="btn btn-dark">
                     <a class = "navbar-brand" href="/logout"> Logout</a>
@@ -55,24 +61,49 @@
 
 
 
-
 {% block content %} 
 
-<div class="main_page jumbotron">
-    <div style="width: 600px; margin: 0 auto;">
-        <h2 class="lead display-6">About Us:</h2>
-        <p class="about_us_description display-7">
-        IADB (Internet Anime Database) serves as an minimalist website allowing users to search for anime and store them into lists for their viewing pleasure
-        </p>
-    </div>
+<h2 class="anime_title display-4"> {{user.username}}'s favorite animes!</h2>
+
+<!-- {% with messages = get_flashed_messages(category_filter=["favorites"]) %}
+{% if messages %}
+
+{% for message in messages %}
+  <span class="text-success"><b>{{ message }}</b></span>
+{% endfor %}
+
+{% endif %}
+{% endwith %} -->
+
+<div id="delete-favs">
+
 </div>
 
-<div class="main_page_img">
-    <div style="width: 500px; margin: 0 auto;">
-        <img src="https://64.media.tumblr.com/881d776707297d0cdb358bdfea6de62e/tumblr_n11udpHvuU1tsanvjo1_500.gifv" alt="">
+
+{% for favorite in user.favorites %}
+
+<div class="anime_container jumbotron" data-username="{{username}}">
+    <h2 class="anime_title display-4"> {{favorite.name}} </h2>
+    <h4>Synopsis: 
+        <p class="lead"> {{favorite.description}}</p>
+    </h4>
+    
+    <div class = "col-md-4 mb-3">
+        <img src="">
     </div>
+    
+    <button id = delete_fav-{{favorite.id}} class="delete_anime btn btn-danger" data-selected="false">
+        Delete From List
+    </button>
+
+    <hr>
 </div>
-
-
+{% endfor %}
 
 {% endblock %}
+
+
+{% block scripts %}
+    {{ super()}}
+{% endblock %}
+

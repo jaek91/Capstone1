@@ -89,11 +89,10 @@ def get_unique_titles(res, title):
     """
     
     titles = []
-    
-    for anime in res:
-        if anime['name'] != title:
-            titles.append(anime['name'])
-            print(titles, "This should be an updating list of titles")
+
+    for entry in res["name"].values():
+        if entry != title:
+            titles.append(entry)
     return titles
 
 def get_info_recommended_titles(lst):

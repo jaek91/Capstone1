@@ -1,0 +1,123 @@
+{% set loggedIn = True %} 
+{% extends 'base.html' %}
+
+{% block title %}
+   Details about {{user.username}}
+{% endblock %}
+
+{% block jquery_script %}
+    {{super()}}
+{% endblock %}
+
+{% block navbars %}
+    {% if user %}
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Welcome to IADB!</a>
+            </div>
+
+            <ul class="navbar-nav navbar-right">
+                <button class="btn btn-dark">
+                    <a class = "navbar-brand" href="/search"> Search </a>
+                </button>
+                <button class="btn btn-dark">
+                    <a class="navbar-brand" href="/"> Home </a>
+                </button>
+                <button class="btn btn-dark">
+                    <a class="navbar-brand" href="/logout"> Logout</a>
+                </button>
+            </ul>
+        </div>
+    </nav>
+    {% else %}
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Welcome to IADB!</a>
+            </div>
+  
+            <ul class="navbar-nav navbar-right">
+                <button class="btn btn-dark">
+                    <a class = "navbar-brand" href="/search"> Search </a>
+                </button>
+                <button class="btn btn-dark">
+                    <a class="navbar-brand" href="/register"> Register </a>
+                </button>
+                <button class="btn btn-dark">
+                    <a class="navbar-brand" href="/login"> Login</a>
+                </button>
+            </ul>
+
+        </div>
+    </nav>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<div class="card mb-5">
+    <div class="card-body">
+        <h1 class="display-4">Details about {{user.username}}</h1>
+        <img src="{{user.img_url}}" alt="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png">
+        <ul>
+            <li>
+                 <b> username: </b> {{user.username}} 
+            </li>
+            <li>
+                <b> email: </b> {{user.email}}
+            </li>
+            <li>
+                <b> full name (first, last): </b> {{user.first_name}} {{user.last_name}}
+            </li>
+        </ul>
+    </div>
+
+    <div>
+        <div class="all_categories_container">
+            <p>
+                <a href="/users/{{user.username}}/favorites", class="btn btn-primary">View All Favorites</a>
+            </p>
+            <p>
+                <a href="/users/{{user.username}}/towatch", class="btn btn-success"> View To Watch List</a>
+            </p>
+            <p>
+                <a href="/users/{{user.username}}/watched", class="btn btn-secondary">View Watched List</a>
+            </p>
+        </div>
+        
+        <form method="POST">
+            <button class="btn btn-danger" onclick="return confirm('Are you sure you want to delete the user?')" formaction="/users/{{user.username}}/delete">Delete User</button>
+        </form>
+    </div>
+</div>
+   
+{% if data %}
+<div class="recommendations mb-5">
+    <h2 class="lead display-6">
+        <b> Recommendations:</b>
+    </h2>
+    <b></b>
+    <span>
+        Because <b>{{data["random_title"]}}</b> is one of your favorites
+    </span>
+    
+    <p> You may also like: </p>
+     {% for dict in data["rec_titles"] %}
+        <!-- <ul>
+            <li> <b>{{dict['title']}}</b> </li>
+        </ul> -->
+        <p>
+            <b>{{dict['title']}}</b>
+        </p>
+        <img src="{{dict['img_url']}}">
+     {% endfor %}
+
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+{% endblock %}
