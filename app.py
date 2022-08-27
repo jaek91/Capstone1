@@ -108,16 +108,16 @@ def display_user_info(username):
                     ## if we have some recommendations, then append it to show in recommendations
                     processed_fav_titles.append(title) 
             
-            ## we randomly choose a title from user's favorite's list ##
-            random_title = random.choice(processed_fav_titles)
-            jp_title = convert_title_to_jp(random_title)
-            results = give_recommendations(jp_title)
-            suggested_titles = get_unique_titles(results, jp_title)
-           
-            rec_titles_info = get_info_recommended_titles(suggested_titles)
-            rec_data = {"random_title": random_title, "rec_titles": rec_titles_info}
+                    ## we randomly choose a title from user's favorite's list ##
+                    random_title = random.choice(processed_fav_titles)
+                    jp_title = convert_title_to_jp(random_title)
+                    results = give_recommendations(jp_title)
+                    suggested_titles = get_unique_titles(results, jp_title)
+                    
+                    rec_titles_info = get_info_recommended_titles(suggested_titles)
+                    rec_data = {"random_title": random_title, "rec_titles": rec_titles_info}
             
-            return render_template('users/info.html', user = user, data = rec_data)
+                    return render_template('users/info.html', user = user, data = rec_data)
     return render_template('users/info.html', user = user)
 
 @app.route('/search', methods=["GET","POST"])
