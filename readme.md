@@ -1,4 +1,4 @@
-# Capstone Project 1 (Anime Database and Recommender)
+# Capstone Project 1 (IADB: Anime Database and Recommender)
 
 ## Goals
 This anime database website will allow for users to search for anime by specifying various filters such as year released, genres, completed, and so forth. 
