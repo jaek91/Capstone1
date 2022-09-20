@@ -1,43 +1,31 @@
-# Capstone Project 1 (Anime Database and Recommender) Proposal
+# IADB Project (Internet Anime Database)
 
-## Goals
-This anime database website will allow for users to search for anime by specifying various filters such as year released, genres, completed, and so forth. 
+## Purpose
+This IADB web application will allow for users to search for anime by specifying various filters such as year released, genres, completed, and so forth. 
 
-It will allow for users to make lists of anime that they have watched or plan on watching. It will also suggest various anime and provide recommendations based on what the user has searched or favorited.
+It will also allow for users to categorize anime that they have watched or plan on watching into various lists (favorites, watched and to-watch). It will also suggest various anime and provide recommendations based on what the user has searched or favorited.
+
+## Deployed at
+[IADB App](https://iadb-app.herokuapp.com/)
 
 ## User demographics
 People who enjoy watching anime and want to track their viewing online as well as wanting to search for new anime to watch.
 
-## Data being used
-I will be using JSON data providing information about each anime using Kitsu API (https://kitsu.docs.apiary.io/#). Additionally, I would like the data retrieved to contain information on a per anime basis based on what the user can search for such as year released, genre, score received on MAL and so forth.
+## API being used
+I am using JSON data providing information about each anime retrieved via the Kitsu API (https://kitsu.docs.apiary.io/#). I chose this API because it's minimalistic, straightforward to use and has a lot of features to search for per route
 
-## Database Schema
-[Schema Draft](https://app.quickdatabasediagrams.com/#/d/TO3e7P)
-- **User** -- One user can have many lists of anime favorites which are separated by list names
-- **Watched list** -- consists of the list of animes that user tracks as having completed
-- **To-Watch list** -- consists of the list of animes that user tracks as to be watched
-- **Favorites** -- consists of custom lists of anime that the user has favorited. User can create no more than 10 of these customized lists
-
-## Potential issues
-1. Some anime searches that users may do may not give the best recommendation results for what they could watch
-2. Difficulty of implementing an accurate recommendation system given the data I have to work with
-
-## Sensitive Information to Secure
-Mainly user sensitive information such as passwords and emails.
-Passwords will be secured via Bcrypt and username along with associated user information will be stored in the database.
+## Technology stack used
+- *Backend*: Python, Flask, PostgresSQL, Pandas
+- *Frontend*: Javascript, HTML, CSS, Bootstrap
 
 ## Functionality of the app
-- User will be able to create a profile with about me and other descriptions
-- User will be able to create lists categorized by type (watched, to watch and favorites)
+- User will be able to create a profile with an about me section
 - User can search for new anime on the database
-- User will be recommended anime based on what their favorites list or on the home page based on their search history
+- Authenticated Users (i.e. those who are logged in) will be able to categorize searched animes into various lists (watched, to watch and favorites)
+- Authenticated Users (i.e. those who are logged in) will be recommended anime based on what their favorites list or on the home page based on their search history. I wanted to implement this because I was interested in recommendation engines and how we use Machine Learning algorithms to do so.
 
 ## User flow
 - User logs on which will display their profile -> access their about me, and links to their various anime lists
 - On homepage, user can search for anime and specify filters using various dropdowns which will be preconfigured
 - On the homepage, user will be recommended anime based on either what they’ve recently searched or based on their favorites list 
-
-## Stretch Goals (Beyond CRUD)
-1. User can see graphs visually displaying their anime lists separated by scores, genres, etc.
-2. Users can leave comments on another users profile (social aspect)
 
