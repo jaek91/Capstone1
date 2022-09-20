@@ -84,11 +84,6 @@ def logout():
     session.pop("username")
     return redirect("/")
 
-@app.route('/recommendations', methods=["GET"])
-def display_recommendations(title):
-    """this will be in the recommendations service app.py """
-    return give_recommendations(title)
-
 @app.route('/users/<username>', methods=["GET"])
 def display_user_info(username):
     if "username" not in session or username != session['username']:
@@ -105,7 +100,7 @@ def display_user_info(username):
                 jp_title = convert_title_to_jp(title)
                 results = give_recommendations(jp_title)
                 if len(results) > 0:                
-                    ## if we have some recommendations, then append it to show in recommendations
+                    ## if we have some recommendations, then append it to recommendations list
                     processed_fav_titles.append(title) 
             
                     ## we randomly choose a title from user's favorite's list ##
@@ -149,7 +144,7 @@ def search_anime():
 
 @app.route("/users/favorites/add", methods=["GET","POST"])
 def add_to_favorites():
-
+    
     if "username" not in session:
         raise Unauthorized
     else:

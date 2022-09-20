@@ -77,7 +77,6 @@ class Favorites(db.Model):
     name = db.Column(db.Text, nullable=False)
     description = db.Column(db.Text, nullable=False)
     username = db.Column(db.String(75), db.ForeignKey("users.username"), nullable=False)
-    # watched = db.Column(db.Text, db.ForeignKey("watched.id"), nullable= True)
 
     @classmethod
     def create(cls, name, description, username):
